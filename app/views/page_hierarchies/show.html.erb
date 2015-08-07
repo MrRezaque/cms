@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Page:</strong>
+  <%= @page_hierarchy.page_id %>
+</p>
+
+<p>
+  <strong>Parent:</strong>
+  <%= @page_hierarchy.parent_id %>
+</p>
+
+<%= link_to 'Edit', edit_page_hierarchy_path(@page_hierarchy) %> |
+<%= link_to 'Back', page_hierarchies_path %>

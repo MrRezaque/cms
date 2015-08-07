@@ -1,0 +1,61 @@
+<%= form_for(@page) do |f| %>
+  <% if @page.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h2>
+
+      <ul>
+      <% @page.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :meta_keywords %><br>
+    <%= f.text_field :meta_keywords %>
+  </div>
+  <div class="field">
+    <%= f.label :meta_description %><br>
+    <%= f.text_field :meta_description %>
+  </div>
+
+    <div class="field">
+      <%= f.label :slug %><br>
+      <%= f.text_field :slug %>
+    </div>
+
+  <div class="field">
+    <%= f.label :title %><br>
+    <%= f.text_field :title %>
+  </div>
+  <div class="field">
+    <%= f.label :body %><br>
+    <%= f.text_area :body, class: 'wysiwyg-field' %>
+  </div>
+<!--
+  <div class="field">
+    <%= f.label :template_name %><br>
+    <%= f.text_field :template_name %>
+  </div>
+    -->
+  <div class="field">
+    <%= f.label :is_published %><br>
+    <%= f.check_box :is_published %>
+  </div>
+<!--  <div class="field">
+    <%= f.label :publish_date %><br>
+    <%= f.datetime_select :publish_date %>
+  </div>
+  <div class="field">
+    <%= f.label :created_by_id %><br>
+    <%= f.text_field :created_by_id %>
+  </div>
+  <div class="field">
+    <%= f.label :changed_by_id %><br>
+    <%= f.text_field :changed_by_id %>
+  </div>-->
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

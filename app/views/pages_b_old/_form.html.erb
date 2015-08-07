@@ -1,0 +1,108 @@
+<%= form_for @page, :html => { :class => "form-horizontal page" } do |f| %>
+
+    <% if @page.errors.any? %>
+    <div id="error_expl" class="panel panel-danger">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= pluralize(@page.errors.count, "error") %> prohibited this page from being saved:</h3>
+      </div>
+      <div class="panel-body">
+        <ul>
+        <% @page.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+        </ul>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="control-group">
+    <%= f.label :meta_keywords, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :meta_keywords, :class => 'form-control' %>
+    </div>
+    <%= f.error_span(@page[:meta_keywords]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :meta_description, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :meta_description, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:meta_description]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :title, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :title, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:title]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :body, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :body, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:body]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :slug, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :slug, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:slug]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :template_name, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :template_name, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:template_name]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :is_published, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :is_published, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:is_published]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :approved, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :approved, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:approved]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :publish_date, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :publish_date, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:publish_date]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :created_by_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :created_by_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:created_by_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :changed_by_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :changed_by_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:changed_by_id]) %>
+  </div>
+  <div class="control-group">
+    <%= f.label :approved_by_id, :class => 'control-label' %>
+    <div class="controls">
+      <%= f.text_field :approved_by_id, :class => 'form-control' %>
+    </div>
+    <%= error_span(@page[:approved_by_id]) %>
+  </div>
+
+
+  <%= f.submit nil, :class => 'btn btn-primary' %>
+  <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+            pages_path, :class => 'btn btn-default' %>
+
+<% end %>

@@ -1,0 +1,54 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Meta keywords:</strong>
+  <%= @page.meta_keywords %>
+</p>
+
+<p>
+  <strong>Meta description:</strong>
+  <%= @page.meta_description %>
+</p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @page.title %>
+</p>
+
+<p>
+  <strong>Body:</strong>
+  <%= @page.body %>
+</p>
+
+<p>
+  <strong>Slug:</strong>
+  <%= @page.slug %>
+</p>
+
+<p>
+  <strong>Template name:</strong>
+  <%= @page.template_name %>
+</p>
+
+<p>
+  <strong>Is published:</strong>
+  <%= @page.is_published %>
+</p>
+
+<p>
+  <strong>Publish date:</strong>
+  <%= @page.publish_date %>
+</p>
+
+<p>
+  <strong>Created by:</strong>
+  <%= @page.created_by %>
+</p>
+
+<p>
+  <strong>Changed by:</strong>
+  <%= @page.changed_by %>
+</p>
+
+<%= link_to 'Edit', edit_page_path(@page) %> |
+<%= link_to 'Back', pages_path %>
