@@ -21,6 +21,11 @@
   </div>
 
     <div class="field">
+      <%= f.label :parent_category %><br>
+      <%= f.select :parent_id, root_categories_select_list, :prompt => 'No' %>
+    </div>
+
+    <div class="field">
       <%= f.label :slug %><br>
       <%= f.text_field :slug %>
     </div>

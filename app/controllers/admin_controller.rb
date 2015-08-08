@@ -1,6 +1,4 @@
-class AdminController < ApplicationController
-
-
+class AdminController < AdminPanelController
   def root
   end
 

@@ -7,6 +7,7 @@ class CreatePages < ActiveRecord::Migration
       t.text :body
       t.string :slug
       t.string :template_name
+      t.integer :parent_id,  index: true, foreign_key: true
       t.boolean :is_published,  default: false
       t.boolean :approved,      default: false
       t.datetime :publish_date

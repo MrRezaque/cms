@@ -1,10 +1,11 @@
-class PagesController < ApplicationController
+class PagesController < AdminPanelController
   before_action :set_page, only: [:show, :edit, :update, :destroy]
+  layout 'admin'
 
   # GET /pages
   # GET /pages.json
   def index
-    @root_pages = Page.root_categories.published
+    @root_pages = Page.root_pages
     @uncategorized_pages = Page.uncategorized
   end
 
@@ -26,6 +27,9 @@ class PagesController < ApplicationController
   # POST /pages.json
   def create
     @page = Page.new(page_params)
+
+    # temporary hardcoded, check role later
+    @page.approved = true
 
     respond_to do |format|
       if @page.save
@@ -70,6 +74,7 @@ class PagesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def page_params
-      params.require(:page).permit(:meta_keywords, :meta_description, :title, :body, :slug, :template_name, :is_published, :publish_date, :created_by_id, :changed_by_id)
+      params.require(:page).permit(:meta_keywords, :meta_description, :title, :body, :slug, :parent_id,
+                                   :template_name, :is_published, :publish_date, :created_by_id, :changed_by_id)
     end
 end

@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     resources :pages
   end
 
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
 
   get '*path' => 'route#process'
 
