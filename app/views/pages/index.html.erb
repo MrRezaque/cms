@@ -6,21 +6,21 @@
 
 <%= render partial: 'pages/pages_list', locals: { pages: @root_pages }  %>
 
-<div>некатегоризированное</div>
+<% if current_user.has_role? :admin %>
+    <div>некатегоризированное</div>
+    <% @uncategorized_pages.each do |page| %>
+        <tr>
+          <td><%= page.title %></td>
+          <td><%= page.slug %></td>
+          <td><%= page.template_name %></td>
+          <td><%= page.is_published %></td>
 
-<% @uncategorized_pages.each do |page| %>
-    <tr>
-      <td><%= page.title %></td>
-      <td><%= page.slug %></td>
-      <td><%= page.template_name %></td>
-      <td><%= page.is_published %></td>
-
-      <td><%= link_to 'Show', page %></td>
-      <td><%= link_to 'Edit', edit_page_path(page) %></td>
-      <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    </tr>
+          <td><%= link_to 'Show', page %></td>
+          <td><%= link_to 'Edit', edit_page_path(page) %></td>
+          <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        </tr>
+    <% end %>
 <% end %>
-
 
 <br>
 

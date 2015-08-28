@@ -1,0 +1,29 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Slug</th>
+    <th>Published</th>
+    <th>Status</th>
+    <th></th><th></th><th></th>
+  </tr>
+<% @pages.each do |page| %>
+    <tr>
+      <td><%= page.title %></td>
+      <td><%= page.slug %></td>
+      <td><%= page.is_published %></td>
+      <td><%= page_status(page) %></td>
+      <td>
+        <% if show_moderate_button?(page) %>
+            <%= form_for page, url: toggle_page_moderation_status_path, id: :id do |f| %>
+               <%= f.hidden_field :to_be_moderated, :value => page.to_be_moderated %>
+                <%= f.hidden_field :id, value: page.id %>
+               <%= f.submit moderate_button_content(page) %>
+            <% end %>
+        <% end %>
+      </td>
+      <td><%= link_to 'Preview', page_preview_path(page), target: '_blank' %></td>
+      <td><%= link_to 'Edit', edit_page_path(page) %></td>
+      <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    </tr>
+<% end %>
+</table>

@@ -1,16 +1,37 @@
 class Users::RegistrationsController < Devise::RegistrationsController
+  before_action :authenticate_user!
+  respond_to :html
+  layout 'admin'
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
+  skip_before_filter :require_no_authentication, only: [:new]
 
-  # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+#GET /resource/sign_up
+  def new
+    authorize! :create, User
 
-  # POST /resource
-  # def create
-  #   super
-  # end
+  end
+
+  #POST /resource
+  def create
+    authorize! :create, User
+    resource = User.new(sign_up_params)
+    resource.save
+    yield resource if block_given?
+    if resource.persisted?
+      resource.add_role :content_manager, Page
+      set_flash_message :notice, :"User added" if is_flashing_format?
+      # redirect to somewhere
+      redirect_to user_list_path
+    else
+      clean_up_passwords resource
+      set_minimum_password_length
+      raise 'huyayz' ##error responding
+      render :action => 'new'
+      #respond_with resource, location => add_user_path
+    end
+
+  end
 
   # GET /resource/edit
   # def edit
@@ -57,4 +78,17 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  def resource_name
+    :user
+  end
+
+  def resource
+    @resource ||= User.new
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:user]
+  end
+
 end

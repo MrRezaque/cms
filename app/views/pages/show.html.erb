@@ -16,6 +16,12 @@
 </p>
 
 <p>
+  <strong>Image:</strong>
+  <%= @page.page_icon %>
+</p>
+
+
+<p>
   <strong>Body:</strong>
   <%= @page.body %>
 </p>
@@ -42,12 +48,12 @@
 
 <p>
   <strong>Created by:</strong>
-  <%= @page.created_by %>
+  <%= @page.created_by_id %>
 </p>
 
 <p>
   <strong>Changed by:</strong>
-  <%= @page.changed_by %>
+  <%= @page.changed_by_id %>
 </p>
 
 <%= link_to 'Edit', edit_page_path(@page) %> |

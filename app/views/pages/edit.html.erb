@@ -4,3 +4,9 @@
 
 <%= link_to 'Show', @page %> |
 <%= link_to 'Back', pages_path %>
+
+<script>
+    window.ycm = window.ycm || {data: {}};
+    window.ycm.data.pageId = <%= @page.id %>;
+    window.ycm.data.csrf_token = '<%= session[:_csrf_token] %>';
+</script>

@@ -22,7 +22,7 @@
 
     <div class="field">
       <%= f.label :parent_category %><br>
-      <%= f.select :parent_id, root_categories_select_list, :prompt => 'No' %>
+      <%= f.select :parent_id, root_categories_select_list(@page.id), :prompt => 'No' %>
     </div>
 
     <div class="field">
@@ -34,6 +34,12 @@
     <%= f.label :title %><br>
     <%= f.text_field :title %>
   </div>
+
+    <div class="field">
+      <%= f.label :page_icon, :class => 'control-label' %><br>
+      <%= f.file_field :page_icon, multiple: false %>
+    </div>
+
   <div class="field">
     <%= f.label :body %><br>
     <%= f.text_area :body, class: 'wysiwyg-field' %>
@@ -48,18 +54,13 @@
     <%= f.label :is_published %><br>
     <%= f.check_box :is_published %>
   </div>
-<!--  <div class="field">
-    <%= f.label :publish_date %><br>
-    <%= f.datetime_select :publish_date %>
-  </div>
-  <div class="field">
-    <%= f.label :created_by_id %><br>
-    <%= f.text_field :created_by_id %>
-  </div>
-  <div class="field">
-    <%= f.label :changed_by_id %><br>
-    <%= f.text_field :changed_by_id %>
-  </div>-->
+    <% if can?(:manage, @page) %>
+        <div class="field">
+          <%= f.label :approved %><br>
+          <%= f.check_box :approved %>
+        </div>
+    <% end %>
+
   <div class="actions">
     <%= f.submit %>
   </div>

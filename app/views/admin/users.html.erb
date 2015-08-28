@@ -1,0 +1,12 @@
+<h3>admins</h3>
+<% @admins.each do |user|  %>
+    <span><%= user.username %></span><br>
+<% end %>
+<h3>content-managers</h3>
+<% @content_managers.each do |user|  %>
+    <span><%= user.username %></span><br>
+<% end %>
+<br>
+<% if can? :create, User %>
+    <%= link_to 'Add new user', add_user_path %>
+<% end %>

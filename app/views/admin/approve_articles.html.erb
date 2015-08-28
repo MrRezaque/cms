@@ -1,0 +1,24 @@
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Preview</th>
+    <th>Author</th>
+    <th>Published</th>
+    <th>Parent Page</th>
+    <th>Action</th>
+  </tr>
+<% @pages.each do |page| %>
+    <tr>
+        <td><%= page.title %></td>
+        <td><a href="<%= page_preview_path(page) %>">Preview</a></td>
+        <td><%= page.creator.username %></td>
+        <%= form_for(page, url: approve_page_path(page)) do |f| %>
+          <td><%= f.check_box :is_published %></td>
+          <td><%= f.select :parent_id, root_categories_select_list(page.id), :prompt => 'No' %></td>
+          <td><%= f.submit "Аппрувнуть" %></td>
+          <%= f.hidden_field :approve, value: true %>
+        <% end %>
+
+    </tr>
+<% end %>
+</table>

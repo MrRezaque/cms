@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   # This is in addition to a real persisted field like 'username'
   attr_accessor :login
 
+  has_many :pages, foreign_key: :created_by_id
   has_and_belongs_to_many :roles, :join_table => :users_roles
 
   validates :username,
@@ -34,7 +35,7 @@ class User < ActiveRecord::Base
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, #:registerable,
          :recoverable, :rememberable, :trackable, :validatable, :authentication_keys => [:login] #, :lockable
 
   def self.find_for_database_authentication(warden_conditions)

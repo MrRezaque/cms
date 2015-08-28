@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150806103637) do
+ActiveRecord::Schema.define(version: 20150827120524) do
 
   create_table "page_hierarchies", id: false, force: :cascade do |t|
     t.integer  "page_id",    null: false
@@ -36,6 +36,8 @@ ActiveRecord::Schema.define(version: 20150806103637) do
     t.integer  "approved_by_id"
     t.datetime "created_at",                       null: false
     t.datetime "updated_at",                       null: false
+    t.string   "page_icon"
+    t.boolean  "to_be_moderated",  default: false, null: false
   end
 
   add_index "pages", ["approved_by_id"], name: "index_pages_on_approved_by_id"

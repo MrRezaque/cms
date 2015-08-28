@@ -1,16 +1,30 @@
 Rails.application.routes.draw do
 
+  root 'static_pages#root'
+
   #get 'admin/root'
 
-  #get 'admin/info'
+  get 'admin/info'
 
   get 'route/process'
 
   #resources :page_hierarchies
 
   scope :admin do
-    root 'admin#root'
+    root to: 'admin#root', as: :root_for_admin
+    get 'pages/my_articles'
+    get 'approve_articles', to: 'admin#approve_articles'
+    get 'pages/preview/(:id)', to: 'pages#preview', as: 'page_preview'
+    patch 'toggle_page_moderation_status', to: 'pages#toggle_to_be_moderated'
+    #patch 'toggle_page_published/(:id)', to: 'pages#toggle_page_published', as: 'toggle_page_published'
+    patch 'approve_page/(:id)', to: 'pages#approve_page', as: 'approve_page'
     resources :pages
+    post 'image_uploader', to: 'image_upload#upload'
+    as :user do
+      get 'add_user', to: 'users/registrations#new', as: 'add_user'
+      post 'register' => 'users/registrations#create', as: 'registration'
+    end
+    get 'users', to: 'admin#users', as: 'user_list'
   end
 
   devise_for :users, controllers: { sessions: 'users/sessions', registrations: 'users/registrations' }
