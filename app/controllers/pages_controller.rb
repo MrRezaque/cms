@@ -17,7 +17,7 @@ class PagesController < AdminPanelController
   def toggle_to_be_moderated
     @page = Page.find(params[:page][:id])
     @page.to_be_moderated = !@page.to_be_moderated
-    @page.save!
+    @page.save!(validate: false)
     redirect_to pages_my_articles_path
   end
 
@@ -41,10 +41,14 @@ class PagesController < AdminPanelController
     @page.assign_attributes(page_params)
     @page.approved = true
     @page.approved_by_id = current_user.id
-    @page.save!(page_params)
+    if @page.save(page_params)
     #raise @page.attributes.inspect
-    @page.creator.remove_role :owner, @page
-    redirect_to request.referer
+      @page.creator.remove_role :owner, @page
+      redirect_to request.referer
+    else
+      redirect_to edit_page_path(@page)
+    end
+
   end
 
   # GET /pages
