@@ -29,6 +29,9 @@ class Ability
     can :update, Page do |page|
       user.has_role? :owner, page
     end
+    can :destroy, Page do |page|
+      user.has_role? :owner, page
+    end
 
     #
     # The first argument to `can` is the action you are giving the user

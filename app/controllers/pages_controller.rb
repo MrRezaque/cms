@@ -112,9 +112,7 @@ class PagesController < AdminPanelController
   # DELETE /pages/1
   # DELETE /pages/1.json
   def destroy
-    if @page.approved?
-      authorize! :destroy, @page
-    end
+    authorize! :destroy, @page
     @page.destroy
     respond_to do |format|
       format.html { redirect_to  request.referer || pages_url, notice: 'Page was successfully destroyed.' }

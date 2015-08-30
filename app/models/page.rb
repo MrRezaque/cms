@@ -16,9 +16,14 @@ class Page < ActiveRecord::Base
   mount_uploader :page_icon, PageIconUploader
   resourcify
 
+  validates :slug, presence: true, uniqueness: { case_sensitive: false }
+
 
   def get_url
     build_path(self)
+  end
+  def get_absolute_path
+    "/#{build_path(self)}"
   end
 
   protected

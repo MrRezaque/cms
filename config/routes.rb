@@ -20,10 +20,10 @@ Rails.application.routes.draw do
     patch 'approve_page/(:id)', to: 'pages#approve_page', as: 'approve_page'
     resources :pages
     post 'image_uploader', to: 'image_upload#upload'
-    as :user do
-      get 'add_user', to: 'users/registrations#new', as: 'add_user'
-      post 'register' => 'users/registrations#create', as: 'registration'
-    end
+    get 'add_user', to: 'users/registrations#new', as: 'add_user'
+    post 'register_user' => 'users/registrations#create' , as: 'registr'
+    # as :user do
+    # end
     get 'users', to: 'admin#users', as: 'user_list'
   end
 

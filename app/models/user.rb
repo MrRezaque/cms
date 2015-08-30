@@ -13,7 +13,7 @@ class User < ActiveRecord::Base
                 :case_sensitive => false
             },
             format: {
-                with: /\A[a-zA-Z]+\z/,
+                with: /\A[a-zA-Z0-9]+\z/,
                 message: "only allows letters"
             },
             length: {

@@ -1,0 +1,8 @@
+.attention-block {
+    background-color: #f2f2f2;
+    -webkit-border-radius: 25px;
+    -moz-border-radius: 25px;
+    border-radius: 25px;
+    margin: 4px;
+    padding: 25px;
+}

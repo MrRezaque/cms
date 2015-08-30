@@ -15,7 +15,7 @@
         <%= form_for(page, url: approve_page_path(page)) do |f| %>
           <td><%= f.check_box :is_published %></td>
           <td><%= f.select :parent_id, root_categories_select_list(page.id), :prompt => 'No' %></td>
-          <td><%= f.submit "Аппрувнуть" %></td>
+          <td><%= f.submit "Аппрувнуть", class: 'btn' %></td>
           <%= f.hidden_field :approve, value: true %>
         <% end %>
 

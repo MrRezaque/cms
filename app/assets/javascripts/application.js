@@ -33,7 +33,8 @@
 // = require langs/ro.js
 // End include plugins
 /// require turbolinks
-//= require_tree .
+////= requir skel.min.js
+// = require_tree .
 
 
 

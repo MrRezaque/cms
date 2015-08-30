@@ -2,40 +2,35 @@
 <html>
 <head>
   <title>Insurance</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= stylesheet_link_tag    'admin', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <div>
+      <nav class="navbar navbar-pills nav-fullwidth" style="float: left">
+        <ul >
+          <li><a href="<%= pages_path %>">Страницы сайта</a></li>
+          <li><a href="<%= pages_my_articles_path %>">Мои статьи</a></li>
+          <li>
+            <% if current_user.has_role? :admin %>
+                <a href="<%= user_list_path %>">Юзера</a>
+            <% end %>
+          </li>
+          <li>
+            <% if can? :approve, Page %>
+                <a href="<%= approve_articles_path %>">Статьи на аппрув(<%= Page.waiting_for_approve.count %>)</a>
+            <% end %>
+          </li>
+        </ul>
+      </nav>
+     <%= render 'admin/user' %>
+      <div style="clear: both"></div>
+    </div>
+  <div><p id="notice"><%= notice %></p></div>
 
-<div>
-  <h1>Панель управления</h1>
-  <a href="<%= pages_path %>">Страницы сайта</a>
-  <a href="<%= pages_my_articles_path %>">Мои статьи</a>
-  <% if current_user.has_role? :admin %>
-    <a href="<%= user_list_path %>">Юзера</a>
-  <% end %>
-  <% if can? :approve, Page %>
-    <a href="<%= approve_articles_path %>">Статьи на аппрув(<%= Page.waiting_for_approve.count %>)</a>
-  <% end %>
-</div>
-<div>
-  <span>Вы зашли как <%= current_user.username %></span>
-  <span>Роль:</span>
-  <% if current_user.has_role? :admin %>
-    <span>Admin</span>
-  <% elsif current_user.has_role? :content_manager, Page%>
-      <span>Content-ninja</span>
-  <% else %>
-    <span>Unknown</span>
-  <% end %>
-  <%= link_to('Logout', destroy_user_session_path, :method => :delete) %>
-</div>
-<div><p id="notice"><%= notice %></p></div>
-
-
-
-<%= yield %>
-
+  <div class="admin-wrap">
+    <%= yield %>
+  </div>
 </body>
 </html>

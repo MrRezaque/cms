@@ -1,21 +1,20 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   before_action :authenticate_user!
-  respond_to :html
   layout 'admin'
 # before_filter :configure_sign_up_params, only: [:create]
 # before_filter :configure_account_update_params, only: [:update]
-  skip_before_filter :require_no_authentication, only: [:new]
+  skip_before_filter :require_no_authentication, only: [:new, :create]
 
 #GET /resource/sign_up
   def new
     authorize! :create, User
-
   end
 
   #POST /resource
   def create
     authorize! :create, User
     resource = User.new(sign_up_params)
+
     resource.save
     yield resource if block_given?
     if resource.persisted?
@@ -26,8 +25,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
     else
       clean_up_passwords resource
       set_minimum_password_length
-      raise 'huyayz' ##error responding
-      render :action => 'new'
+      respond_with resource #, location: add_user_path
+      #raise 'huyayz' ##error responding
+      #render :action => 'new'
       #respond_with resource, location => add_user_path
     end
 

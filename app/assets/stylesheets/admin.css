@@ -1,0 +1,35 @@
+/*
+*= require_tree .
+*= require froala_editor.min.css
+*= require froala_style.min.css
+*= require font-awesome
+*= require kube.min
+*= require_self
+*/
+
+.unpublished {
+    color: gray;
+}
+
+.child-pages {
+    margin-left: 20px;
+}
+
+body {
+    padding: 10px;
+}
+
+.admin-wrap {
+    margin-left: 15px;
+    margin-right: 15px;
+}
+
+.add-article {
+    /*padding: 10px;*/
+}
+
+.btn-blue, .btn-blue:visited,
+.btn-red, .btn-red:visited
+{
+    color: white;
+}

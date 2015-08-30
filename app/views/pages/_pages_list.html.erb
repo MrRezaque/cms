@@ -1,15 +1,20 @@
-<% pages.each do |page| %>
-    <tr class="<%= "unpublished" unless page.is_published  %>">
-      <td><%= page.title %></td>
-      <!--<td><%= page.slug %></td>-->
 
-      <td><%= link_to 'Show', page if can? :read, @page %></td>
-      <td><%= link_to 'Edit', edit_page_path(page) if can? :update, @page %></td>
-      <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @page %></td>
-    </tr>
-    <% if page.child_pages.count > 0 %>
-        <div class="child-pages">
-          <%= render partial: 'pages/pages_list', locals: {pages: page.child_pages} %>
-        </div>
-    <% end %>
+<% pages.each do |page| %>
+    <div>
+      <div class="<%= "unpublished" unless page.is_published  %>">
+        <tr>
+          <td><%= page.title %></td>
+          <td><%= page.slug %></td>
+
+          <td><%= link_to 'Link', page.get_absolute_path %></td>
+          <td><%= link_to 'Edit', edit_page_path(page) if can? :update, @page %></td>
+          <td><%= link_to 'Destroy', page, method: :delete, data: { confirm: 'Are you sure?' } if can? :destroy, @page %></td>
+        </tr>
+      </div>
+        <% if page.child_pages.count > 0 %>
+            <div class="child-pages">
+              <%= render partial: 'pages/pages_list', locals: {pages: page.child_pages} %>
+            </div>
+        <% end %>
+    </div>
 <% end %>
