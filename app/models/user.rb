@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
             },
             format: {
                 with: /\A[a-zA-Z0-9]+\z/,
-                message: "only allows letters"
+                message: "only allows letters and numbers"
             },
             length: {
                 minimum: 3,
